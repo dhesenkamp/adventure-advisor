@@ -1,6 +1,6 @@
 # Adventure Advisor
 
-> Personal outdoor activity recommender system for activities such as hiking, running, cycling, via ferrata, climbing, mountaineering.
+> Personal outdoor activity recommender system for activities such as hiking, running, cycling, via ferrata, climbing and mountaineering.
 
 Architecture:
 ![Architecture](assets/architecture.png)
