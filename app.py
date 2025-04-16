@@ -18,7 +18,7 @@ class StreamlitApp:
   def processUserInput(self, userInput):
     st.session_state.history.append({"role": "user", "content": userInput})
 
-    # Call your orchestrator logic here
+    # Call orchestrator logic here
     if self.orchestrator:
       response = self.orchestrator.run(userInput)
     else:
@@ -32,8 +32,16 @@ class StreamlitApp:
   def run(self):
     st.set_page_config(page_title="Adventure Advisor", page_icon="🥾")
     st.title("🥾 Adventure Advisor")
+    st.write("Currently only handles weather queries. Other queries will still yield an answer from the orchestrator LLM, but no further logic has been implemented. Also, the current logic is a bit sloppy and incomplete. Orchestrator doesn't have memory/context yet.")
+    st.write("Example: 'What's the weather like in Trento, Italy tomorrow at 2pm?'")
+
+    with st.sidebar:
+      st.header("About")
+      st.write("Available agents:")
+      for agent in self.orchestrator.agents:
+        st.write(f"- {agent}")
 
     self.renderChatHistory()
 
-    if userInput := st.chat_input("Ask me anything..."):
+    if userInput := st.chat_input("Ask me about the weather..."):
       self.processUserInput(userInput)
