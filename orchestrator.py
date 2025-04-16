@@ -35,7 +35,10 @@ class OrchestratorAgent:
       print("Failed to extract JSON from response.")
       return "I couldn't understand the location and time you provided."
     location = structuredData["location"]
-    time = structuredData["time"]
+    try:
+      time = structuredData["time"]
+    except KeyError:
+      time = "now"
 
     weatherQuery = f"What is the weather in {location} at {time}?"
     weatherResult = self.agents["weather"].getWeather(weatherQuery)
