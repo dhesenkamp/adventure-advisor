@@ -1,0 +1,9 @@
+name: adventure
+channels:
+  - conda-forge
+dependencies:
+  - geopandas
+  - numpy
+  - pandas
+  - python
+  - osmnx

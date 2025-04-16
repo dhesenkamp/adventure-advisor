@@ -6,3 +6,12 @@
 
 # Architecture
 ![Architecture](assets/architecture.png)
+
+# Requirements
+## Environment
+Create conda environment file: `conda env export --from-history | grep -v "^prefix: " > environment.yml`
+
+- numpy
+- pandas
+- geopandas
+- osmnx
