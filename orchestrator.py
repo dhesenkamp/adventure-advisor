@@ -15,6 +15,7 @@ class OrchestratorAgent:
     self.instructions = f"You are an orchestrator, responsible for coordinating the activities of other agents. You will receive a user message and must decide which agent(s), if any, to call. Available agents: {', '.join(self.agents.keys())}. If no agents are needed, you will respond directly to the user."
 
   def getWeather(self, prompt):
+    print("-- invoking weather agent --")
     extractPrompt = (
         f"Extract the location and time/date from this user message:\n\n"
         f"{prompt}\n\n"
@@ -46,13 +47,15 @@ class OrchestratorAgent:
     return weatherResult
 
   def run(self, prompt, weather=str()):
-    if "weather" in prompt.lower():
-      weather = self.getWeather(prompt)
+    requiredAgents = self.decideAgents(prompt)
+    for agent in requiredAgents:
+      if agent == "weather":
+        weather = self.getWeather(prompt)
 
     finalAnswer = self.client.models.generate_content(
         model=self.model,
         config=types.GenerateContentConfig(
-            system_instruction=self.instructions
+            system_instruction="Based on the context you have, provide a concise and relevant answer to the user's question. If you have called any agents, include their responses in your answer.",
         ),
         contents=prompt + weather
     )
@@ -70,3 +73,11 @@ class OrchestratorAgent:
     except json.JSONDecodeError as e:
       print("JSON parsing failed:", e)
       return None
+
+  def decideAgents(self, prompt):
+    # Placeholder for agent decision logic
+    # This could be more complex based on the prompt
+    if "weather" in prompt.lower():
+      return ["weather"]
+    else:
+      return []
