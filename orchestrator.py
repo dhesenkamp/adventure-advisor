@@ -45,7 +45,7 @@ class OrchestratorAgent:
 
     return weatherResult
 
-  def run(self, prompt, weather=None):
+  def run(self, prompt, weather=str()):
     if "weather" in prompt.lower():
       weather = self.getWeather(prompt)
 
