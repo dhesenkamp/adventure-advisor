@@ -7,3 +7,7 @@ dependencies:
   - pandas
   - python
   - osmnx
+  - streamlit
+  - streamlit-folium
+  - pip:
+    - google-genai
