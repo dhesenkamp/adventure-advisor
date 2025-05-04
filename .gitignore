@@ -176,3 +176,5 @@ cython_debug/
 # macOS Finder directory
 .DS_Store
 *.DS_Store
+
+token.pickle
