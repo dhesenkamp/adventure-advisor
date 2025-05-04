@@ -56,10 +56,7 @@ def prepareAgentPrompt():
 
   In your answer, make sure to include all events of that day and if there is not start or end time, use 00:00 and 23:59.
   For events spanning multiple days, consider all days between the start and end date as separate all-day events from 00:00 to 23:59.
-  For each event, ask the user: "Would you like to consider this event?" Include the time and title.
-  Wait for a yes/no response from the user before including the event in your final result.
-  Only include confirmed events in your output.
-  Return the result as a JSON object in this format, make sure to include all confirmed events of that day:
+  Return the result as a JSON object in this format, make sure to include all events of that day:
   {{
     "action": "return_scheduled_events",
     "data": {{
