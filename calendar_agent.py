@@ -18,21 +18,23 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
 
-
 # Load env variables
 load_dotenv()
 
 SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 
-CREDENTIALS = os.environ["CALENDER_CREDENTIALS"] #path to file with credentials
+# path to file with credentials
+# CREDENTIALS = os.environ["CALENDER_CREDENTIALS"]
+CREDENTIALS = "./credentials.json"
 
 API_KEY = os.environ["GEMINI_API_KEY"]
 
 llm = ChatGoogleGenerativeAI(
-  model = "gemini-2.0-flash",
-  temperature=0,
-  api_key = API_KEY
+    model="gemini-2.0-flash",
+    temperature=0,
+    api_key=API_KEY
 )
+
 
 def prepareAgentPrompt():
   template = """
@@ -71,11 +73,14 @@ def prepareAgentPrompt():
   # and ask, if the user would like to consider the events in the planning, or if the events can be ignored.
   return ChatPromptTemplate.from_template(template)
 
+
 memory = ConversationBufferMemory(memory_key="history", input_key="input")
 config = RunnableConfig(configurable={"memory": memory})
 prompt = prepareAgentPrompt()
 
 # Input schema for the weather tool
+
+
 class EventsInput(BaseModel):
   date: str  # Format: YYYY-MM-DD
 
@@ -97,7 +102,7 @@ def getEvents(date):
       creds.refresh(Request())
     else:
       flow = InstalledAppFlow.from_client_secrets_file(
-        CREDENTIALS, SCOPES)
+          CREDENTIALS, SCOPES)
       creds = flow.run_local_server(port=0)
       # Save the credentials for the next run
       with open('token.pickle', 'wb') as token:
@@ -107,17 +112,19 @@ def getEvents(date):
   localTz = pytz.timezone(tzName)
   # Call the Calendar API
   targetDate = datetime.datetime.strptime(date, "%Y-%m-%d")
-  startDt = localTz.localize(datetime.datetime.combine(targetDate, datetime.time.min))
-  endDt = localTz.localize(datetime.datetime.combine(targetDate, datetime.time.max))
+  startDt = localTz.localize(
+      datetime.datetime.combine(targetDate, datetime.time.min))
+  endDt = localTz.localize(
+      datetime.datetime.combine(targetDate, datetime.time.max))
 
   timeMin = startDt.isoformat()
   timeMax = endDt.isoformat()
   eventsResult = service.events().list(
-    calendarId='primary', 
-    timeMin=timeMin,
-    timeMax=timeMax, 
-    singleEvents=True,
-    orderBy='startTime'
+      calendarId='primary',
+      timeMin=timeMin,
+      timeMax=timeMax,
+      singleEvents=True,
+      orderBy='startTime'
   ).execute()
   events = []
   for event in eventsResult.get('items', []):
@@ -125,9 +132,9 @@ def getEvents(date):
     end = event['end'].get('dateTime', event['end'].get('date'))
     summary = event.get('summary', 'No title')
     events.append({
-      "summary": summary,
-      "start": start,
-      "end": end
+        "summary": summary,
+        "start": start,
+        "end": end
     })
 
   return {"date": date, "events": events}
@@ -136,12 +143,13 @@ def getEvents(date):
 # Agent setup
 tools = [getEvents]
 agent = create_tool_calling_agent(llm, tools, prompt)
-agentExecutor = AgentExecutor(agent=agent, tools=tools, memory=memory, verbose=True)
+calendarExecutor = AgentExecutor(
+    agent=agent, tools=tools, memory=memory, verbose=True)
 
 # Run query
 today_str = datetime.date.today().isoformat()
-response = agentExecutor.invoke({"input": "What appointments do I have tomorrow?",
-                                "today": today_str
-                                }, 
-                                config=config)
+response = calendarExecutor.invoke({"input": "What appointments do I have in the next two days?",
+                                    "today": today_str
+                                    },
+                                   config=config)
 print(response)
