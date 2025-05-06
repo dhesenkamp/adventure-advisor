@@ -49,8 +49,6 @@ class BaseAgent:
 
   def run(self, query: str) -> dict:
     """Run agent with a user query. The query is passed to the LLM and the result is returned as a dict. Get the NL result with key "output" and the tool call with the key "tool_call".
-
-    Example output:
     """
     return self.executor.invoke({"input": query})
 
