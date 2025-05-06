@@ -46,18 +46,31 @@ class OrchestratorAgent:
 
     return weatherResult
 
-  def run(self, prompt, weather=str()):
-    requiredAgents = self.decideAgents(prompt)
-    for agent in requiredAgents:
-      if agent == "weather":
-        weather = self.getWeather(prompt)
+  def getActivity(self, prompt):
+    activityResult = self.agents["activity"].getActivity(prompt)
+    return activityResult
+
+  def run(self, prompt):
+    result = ""
+
+    if "weather" in prompt.lower():
+      result += "\n[Weather Info]\n" + self.getWeather(prompt)
+
+    if any(word in prompt.lower() for word in ["hike", "trail", "bike", "tour", "outdoor", "activity"]):
+      result += "\nActivity Suggestion\n" + self.getActivity(prompt)
+      print(result)
+
+    combined_prompt = (
+        f"User asked: {prompt}\n\n"
+        f"Responses from the agents:\n{result}\n\n"
+        f"Combine the results into a helpful, friendly answer to the user, include the title and other details of the tour"
+    )
 
     finalAnswer = self.client.models.generate_content(
         model=self.model,
         config=types.GenerateContentConfig(
-            system_instruction="Based on the context you have, provide a concise and relevant answer to the user's question. If you have called any agents, include their responses in your answer.",
-        ),
-        contents=prompt + weather
+            system_instruction=self.instructions),
+        contents=combined_prompt
     )
     return finalAnswer.text
 

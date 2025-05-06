@@ -6,7 +6,8 @@ from weather import WeatherAgent
 from app import StreamlitApp
 
 weather = WeatherAgent()
-orchestrator = OrchestratorAgent({"weather": weather})
+activity = ActivityAgent()
+orchestrator = OrchestratorAgent({"weather": weather, "activity": activity})
 
 # request = "What's the weather like in Trento, Italy tomorrow?"
 # response = orchestrator.run(request)
