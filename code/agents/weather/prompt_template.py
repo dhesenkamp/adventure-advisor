@@ -14,12 +14,12 @@ from datetime import datetime
 """
 
 PROMPT_TEMPLATE = (
-    """Look up the weather for the date and location given by the user input. Transform any date mentioned by the user into a date format YYYY-MM-DD.
+    """Look up the weather if a date and location are provided by the user in his or her query. Transform any date mentioned by the user into a date format YYYY-MM-DD.
 
     User input: {input}
 
     Your scratchpad: {agent_scratchpad}
 
-    Answer in a brief sentence with the most relevant information.
+    Answer in a brief sentence with the most relevant information. Do not include unnecessary details or information, if the user has not asked for it. Do not include anything that is not related to the weather.
     """
 )
