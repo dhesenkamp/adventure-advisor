@@ -5,6 +5,7 @@ import datetime
 from agents.orchestrator import OrchestratorAgent
 from agents.weather import WeatherAgent
 from agents.calendar import CalendarAgent
+from app import StreamlitApp
 
 
 if "GEMINI_API_KEY" not in os.environ:
@@ -23,7 +24,10 @@ orchestrator = OrchestratorAgent(
     }
 )
 
-tomorrow = datetime.datetime.now().date() + datetime.timedelta(days=1)
-query = f"Do I have any meetings on {tomorrow} and what should I wear in Berlin?"
-result = orchestrator.run(query)
-print(result)
+app = StreamlitApp(orchestrator)
+app.run()
+
+# tomorrow = datetime.datetime.now().date() + datetime.timedelta(days=1)
+# query = f"Do I have any meetings on {tomorrow} and what should I wear in Berlin?"
+# result = orchestrator.run(query)
+# print(result)
