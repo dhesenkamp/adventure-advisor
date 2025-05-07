@@ -15,7 +15,7 @@ oauthlib
 osmnx
 pandas
 postgrest
-psycopg2
+psycopg2-binary
 pydantic
 python-weather==2.0.7
 pytz
