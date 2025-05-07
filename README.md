@@ -23,9 +23,22 @@ Our first setup uses Google's Gemini models: [Gemini API tutorial](https://colab
 ## Environment
 Create conda environment file: `conda env export --from-history | grep -v "^prefix: " > environment.yml`
 
-- numpy
-- pandas
-- geopandas
-- osmnx
-- streamlit
+- google-api-python-client
+- google-ai-generativelanguage
+- google-auth
+- google-auth-oauthlib
 - google-genai
+- langchain
+- langchain-community
+- langchain-core
+- langchain-experimental
+- langchain-google-genai
+- oauthlib
+- osmnx
+- psycopg2
+- pydantic
+- python-weather
+- pyty
+- streamlit
+- streamlit-folium
+- supabase
