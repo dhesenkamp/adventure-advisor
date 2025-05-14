@@ -14,12 +14,24 @@ from datetime import datetime
 """
 
 PROMPT_TEMPLATE = (
-    """Look up the weather if a date and location are provided by the user in his or her query. Transform any date mentioned by the user into a date format YYYY-MM-DD.
-
-    User input: {input}
-
-    Your scratchpad: {agent_scratchpad}
-
-    Answer in a brief sentence with the most relevant information. Do not include unnecessary details or information, if the user has not asked for it. Do not include anything that is not related to the weather.
+    """
+      Today is {today}.
+      Extract the date and location from the {input} and convert the date to string YYYY-MM-DD format, then call the `getWeather` tool with the extracted date and location.
+      Example:
+      User: "What will the weather be like on 6th of June in Berlin?"
+      → Extracted date: "2025-06-06"
+      → Extracted location: "Berlin"
+      → Call tool: getWeather(location="Berlin", date="2025-06-06")
+      Look up the weather and give a forcast for the given day and location, using the getWeather tool. Use the users input to get the location and day.
+      {agent_scratchpad}
+      Return the result as a valid JSON object in this format:
+      {{
+        "action": "return_weather",
+        "data": {{
+          "date": "<actual date in YYYY-MM-DD>",
+          "location": "<location>",
+          "forecast": [<returned weather information>]
+        }}
+      }}
     """
 )
