@@ -38,7 +38,7 @@ Create conda environment file: `conda env export --from-history | grep -v "^pref
 - psycopg2
 - pydantic
 - python-weather
-- pyty
+- pytz
 - streamlit
 - streamlit-folium
 - supabase
