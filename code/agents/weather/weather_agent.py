@@ -24,6 +24,9 @@ class WeatherAgent(BaseAgent):
         promptTemplate=promptTemplate
     )
 
+  def run(self, query, today=None):
+    today = datetime.datetime.now().date()
+    return self.executor.invoke({"input": query, "today": today})
 
 if __name__ == "__main__":
   if "GEMINI_API_KEY" not in os.environ:

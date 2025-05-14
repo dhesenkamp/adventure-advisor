@@ -40,6 +40,7 @@ class CalendarAgent(BaseAgent):
     )
 
   def run(self, query, today=None):
+    today = datetime.datetime.now().date()
     return self.executor.invoke({"input": query, "today": today}, config=self.config)
 
 
