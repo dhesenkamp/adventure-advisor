@@ -52,10 +52,10 @@ def queryDatabase(
   }
 
   # Define how to handle each field
-  string_fields = {"category", "region", "primary_region"}
-  lte_fields = {"max_altitude", "descent_m"}
-  eq_fields = {"experience", "difficulty"}
-  gte_fields = {
+  stringFields = {"category", "region", "primary_region"}
+  lteFields = {"max_altitude", "descent_m"}
+  eqFields = {"experience", "difficulty"}
+  gteFields = {
       "duration_min", "length_m", "ascent_m", "min_altitude"
   }
 
@@ -63,13 +63,13 @@ def queryDatabase(
     if value is None:
       continue
 
-    if field in string_fields and isinstance(value, str):
+    if field in stringFields and isinstance(value, str):
       query = query.ilike(field, f"%{value}%")
-    elif field in lte_fields and isinstance(value, int):
+    elif field in lteFields and isinstance(value, int):
       query = query.lte(field, value)
-    elif field in gte_fields and isinstance(value, int):
+    elif field in gteFields and isinstance(value, int):
       query = query.gte(field, value)
-    elif field in eq_fields:
+    elif field in eqFields:
       query = query.eq(field, value)
 
   response = query.limit(limit).execute()
