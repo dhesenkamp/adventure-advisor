@@ -22,7 +22,7 @@ PROMPT_TEMPLATE = (
       → Extracted date: "2025-06-06"
       → Extracted location: "Berlin"
       → Call tool: getWeather(location="Berlin", date="2025-06-06")
-      Look up the weather and give a forcast for the given day and location, using the getWeather tool. Use the users input to get the location and day.
+      Look up the weather and give a forecast for the given day and location, using the getWeather tool. Use the users input to get the location and day.
       {agent_scratchpad}
       Return the result as a valid JSON object in this format:
       {{
