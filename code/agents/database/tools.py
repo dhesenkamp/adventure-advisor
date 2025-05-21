@@ -22,18 +22,20 @@ def queryDatabase(
   Query a Supabase database for outdoor activities based on various (optional) parameters
 
   Args:
-  category: str, 
-    ["Long distance cycling", "Winter hiking", "Alpine tour", "MTB Transalp", "Trail running", "Cycle routes", "Mountainbiking", "Gravel Bike", "Hiking with kids", "Long distance hiking trail", "Mountain tour", "Alpine climbing", "Hiking trail"]
-  difficulty: int, [0, 1, 2, 3]
-  duration_min: int,
-  length_m: int,
-  ascent_m: int,
-  descent_m: int,
-  min_altitude: int,
-  max_altitude: int,
-  experience: int, [0, 1, 2, 3, 4, 5, 6]
-  region: str
-  primary_region: str
+    category: str, 
+      ["Long distance cycling", "Winter hiking", "Alpine tour", "MTB Transalp", "Trail running", "Cycle routes", "Mountainbiking", "Gravel Bike", "Hiking with kids", "Long distance hiking trail", "Mountain tour", "Alpine climbing", "Hiking trail"]
+    difficulty: int, [0, 1, 2, 3]
+    duration_min: int,
+    length_m: int,
+    ascent_m: int,
+    descent_m: int,
+    min_altitude: int,
+    max_altitude: int,
+    experience: int, [0, 1, 2, 3, 4, 5, 6]
+    region: str
+    primary_region: str
+  Returns:
+    list: list of dicts containing the query results, e.g. [{"title": "Hiking in the Alps", "region": "Alps", "length_m": 12000, "difficulty": 2}, {}, ...]
   """
 
   client = create_client(URL, KEY)
