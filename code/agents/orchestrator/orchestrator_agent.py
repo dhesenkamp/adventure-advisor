@@ -61,8 +61,9 @@ class OrchestratorAgent(BaseAgent):
 
     selectedAgents = self.routing(query)
     if not selectedAgents:
-      return "No agents available to handle the request."
-    results = self.handle(query, selectedAgents)
+      results = ""
+    else:
+      results = self.handle(query, selectedAgents)
     summary = self.summarize(query, results)
 
     return summary
