@@ -5,6 +5,7 @@ import datetime
 from agents.orchestrator import OrchestratorAgent
 from agents.weather import WeatherAgent
 from agents.calendar import CalendarAgent
+from agents.database import DatabaseAgent
 from app import StreamlitApp
 
 
@@ -15,13 +16,15 @@ API_KEY = os.environ["GEMINI_API_KEY"]
 
 weatherAgent = WeatherAgent(apiKey=API_KEY)
 calendarAgent = CalendarAgent(apiKey=API_KEY)
+databaseAgent = DatabaseAgent(apiKey=API_KEY)
 
 orchestrator = OrchestratorAgent(
     apiKey=API_KEY,
     agents={
         "weather": weatherAgent,
-        "calendar": calendarAgent
-    }
+        "calendar": calendarAgent,
+        "database": databaseAgent,
+    },
 )
 
 app = StreamlitApp(orchestrator)
