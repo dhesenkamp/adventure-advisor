@@ -25,9 +25,14 @@ class OrchestratorAgent(BaseAgent):
     response = self.model.invoke(prompt)
     # Expecting something like: '["calendar"]' or '["calendar", "weather"]'
 
-    if isinstance(response.content, str):
-      return ast.literal_eval(response.content)
-    return response.content
+    try:
+      parsed = ast.literal_eval(response.content)
+      if isinstance(parsed, list):
+        return parsed
+      elif isinstance(response.content, str):
+        return response.content
+    except (SyntaxError, ValueError) as e:
+      return []
 
   def handle(self, query: str, selectedAgents: list) -> str:
     """Handle the query by routing it to the appropriate agent(s) and returning the result."""
@@ -62,7 +67,7 @@ class OrchestratorAgent(BaseAgent):
     """
 
     selectedAgents = self.routing(query)
-    if not selectedAgents:
+    if not isinstance(selectedAgents, list) or not selectedAgents:
       results = ""
     else:
       results = self.handle(query, selectedAgents)
