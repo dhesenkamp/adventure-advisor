@@ -25,7 +25,9 @@ class OrchestratorAgent(BaseAgent):
     response = self.model.invoke(prompt)
     # Expecting something like: '["calendar"]' or '["calendar", "weather"]'
 
-    return ast.literal_eval(response.content)
+    if isinstance(response.content, str):
+      return ast.literal_eval(response.content)
+    return response.content
 
   def handle(self, query: str, selectedAgents: list) -> str:
     """Handle the query by routing it to the appropriate agent(s) and returning the result."""
@@ -51,7 +53,7 @@ class OrchestratorAgent(BaseAgent):
     )
 
     finalResponse = self.model.invoke(instructions)
-    return finalResponse.content
+    return finalResponse.content if isinstance(finalResponse.content, str) else str(finalResponse.content)
 
   def run(self, query: str) -> str:
     """Run the orchestrator agent with a user query. The query is passed to the LLM, which decides which specialized agents to call.
