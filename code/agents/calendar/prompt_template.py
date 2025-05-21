@@ -5,8 +5,6 @@ PROMPT_TEMPLATE = (
     """Today is {today}.
     You are a helpful assistant that helps users check their calendar.
 
-    Conversation history: {history}
-
     The input is: {input}
 
     Your scratchpad: {agent_scratchpad}

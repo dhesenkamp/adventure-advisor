@@ -29,19 +29,6 @@ class CalendarAgent(BaseAgent):
         tools=tools,
         promptTemplate=promptTemplate
     )
-    self.memory = ConversationBufferMemory(
-        memory_key="history", input_key="input")
-    self.config = RunnableConfig(configurable={"memory": self.memory})
-    self.executor = AgentExecutor(
-        agent=self.agent,
-        tools=self.tools,
-        memory=self.memory,
-        verbose=True,
-    )
-
-  def run(self, query, today=None):
-    today = datetime.datetime.now().date()
-    return self.executor.invoke({"input": query, "today": today}, config=self.config)
 
 
 if __name__ == "__main__":
