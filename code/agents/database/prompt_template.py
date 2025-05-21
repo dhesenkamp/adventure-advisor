@@ -47,10 +47,10 @@ QUERY_PROMPT = (
     """{{
     "action": "return_activities",
     "data": {{
-      "title": "<actual title>",
-      "location": "<actual location>",
-      "length": "<actual length_m>",
-      "difficulty": "<actual difficulty>"
-    }}
+        "title": "<title of the activity>",
+        "location": "<region or primary_region>",
+        "length": "<length_m>",
+        "difficulty": "<difficulty>"
+      }}
   }}"""
 )
