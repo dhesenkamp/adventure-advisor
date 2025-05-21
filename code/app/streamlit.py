@@ -24,7 +24,7 @@ class StreamlitApp:
     if "chatHistory" not in st.session_state:
       st.session_state.chatHistory = []  # Stores full conversation
 
-    st.title("quickstart")
+    st.title("Adventure Advisor")
     with st.sidebar:
       st.markdown(
           """

@@ -1,6 +1,6 @@
 # Adventure Advisor
 
-[Launch app here!](https://adventure-advisor.streamlit.app/?embed=true)
+[Launch app here!](https://adventure-advisor-3sqm8z2.streamlit.app/?embed=true)
 
 > Personalized, AI-based outdoor activity recommender system for activities such as hiking, running, cycling, via ferrata, climbing, mountaineering.
 
