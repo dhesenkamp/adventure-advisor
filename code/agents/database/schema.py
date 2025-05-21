@@ -3,7 +3,7 @@ import supabase
 
 url = "https://ovpkmntjpebbfbsnedlq.supabase.co"
 key = os.environ.get("SUPABASE_API_KEY")
-client = supabase.create_client(url, key)
+client = supabase.create_client(url, str(key))
 
 
 def get_unique(field: str):
@@ -27,6 +27,5 @@ CATEGORY = [
     "Fishing", "Long distance hiking trail", "Snowshoeing", "Race cycling", "Fixed rope route", "Ice climbing", "Mountain tour", "Alpine climbing", "E-Bike", "Hiking trail", "Back-country skiing", "Pilgrim trail", "Nordic walking"
 ]
 TYPE = ["tour"]
-
 
 print(get_unique("primary_region"))
