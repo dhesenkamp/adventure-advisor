@@ -1,14 +1,19 @@
 import os
+import json
 import pickle
 import pytz
 import datetime
+
+from dotenv import load_dotenv
 
 from langchain_core.tools import tool
 from googleapiclient.discovery import build
 from google.auth.transport.requests import Request
 from google_auth_oauthlib.flow import InstalledAppFlow
 
-CREDENTIALS = "./credentials.json"
+load_dotenv()
+
+CREDENTIALS = json.loads(os.environ.get("GOOGLE_OAUTH_CREDENTIALS"))
 SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 
 

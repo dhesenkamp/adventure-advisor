@@ -1,11 +1,14 @@
 import os
 import getpass
 import datetime
+from dotenv import load_dotenv
 
 from langchain_core.tools import tool
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.agents import create_tool_calling_agent, AgentExecutor
 from langchain_google_genai import ChatGoogleGenerativeAI
+
+load_dotenv()
 
 
 class BaseAgent:
@@ -23,8 +26,8 @@ class BaseAgent:
     self.prompt = self._buildPrompt(promptTemplate)
     self.agent = create_tool_calling_agent(self.model, self.tools, self.prompt)
     self.executor = AgentExecutor(
-        agent=self.agent, 
-        tools=self.tools, 
+        agent=self.agent,
+        tools=self.tools,
         verbose=True
     )
 
@@ -63,7 +66,7 @@ if __name__ == "__main__":
     os.environ["GEMINI_API_KEY"] = getpass.getpass("Enter Gemini API key: ")
 
   executor = BaseAgent(
-      apiKey=os.environ["GEMINI_API_KEY"]
+      apiKey=os.environ.get("GEMINI_API_KEY")
   )
 
   query = "Hello world"

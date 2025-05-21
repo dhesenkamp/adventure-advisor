@@ -2,9 +2,13 @@ import os
 import supabase
 import getpass
 
+from dotenv import load_dotenv
+
 from agents.base_agent import BaseAgent
 from agents.database.prompt_template import QUERY_PROMPT
 from agents.database.tools import queryDatabase
+
+load_dotenv()
 
 TOOLS = [queryDatabase]
 
@@ -20,7 +24,7 @@ if __name__ == "__main__":
     os.environ["GEMINI_API_KEY"] = getpass.getpass("Enter Gemini API key: ")
 
   executor = DatabaseAgent(
-      apiKey=os.environ["GEMINI_API_KEY"]
+      apiKey=os.environ.get("GEMINI_API_KEY")
   )
 
   query = "I want to go hiking in the Garda region with medium difficulty and for up to 4 hours."

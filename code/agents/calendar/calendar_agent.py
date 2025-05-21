@@ -1,3 +1,4 @@
+import json
 import os
 import sys
 import getpass
@@ -5,6 +6,7 @@ import pickle
 import datetime
 import pytz
 
+from dotenv import load_dotenv
 from langchain_core.runnables import RunnableConfig
 from langchain.memory import ConversationBufferMemory
 from langchain.agents import AgentExecutor
@@ -14,8 +16,11 @@ from agents.base_agent import BaseAgent
 from agents.calendar.tools import getEvents
 from agents.calendar.prompt_template import PROMPT_TEMPLATE
 
+load_dotenv()
+
+
 TOOLS = [getEvents]
-CREDENTIALS = "..../credentials.json"
+CREDENTIALS = json.loads(os.environ["GOOGLE_OAUTH_CREDENTIALS"])
 
 
 class CalendarAgent(BaseAgent):
@@ -37,7 +42,7 @@ if __name__ == "__main__":
     os.environ["GEMINI_API_KEY"] = getpass.getpass("Enter Gemini API key: ")
 
   executor = CalendarAgent(
-      apiKey=os.environ["GEMINI_API_KEY"],
+      apiKey=os.environ.get("GEMINI_API_KEY")
   )
 
   today = datetime.datetime.now().date()

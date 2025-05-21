@@ -1,8 +1,12 @@
 import os
+
+from dotenv import load_dotenv
 from supabase import create_client
 from langchain_core.tools import tool
 
-URL = "https://ovpkmntjpebbfbsnedlq.supabase.co"
+load_dotenv()
+
+URL = os.environ.get("SUPABASE_URL")
 KEY = os.environ.get("SUPABASE_API_KEY")
 
 
@@ -31,6 +35,7 @@ def queryDatabase(
   region: str
   primary_region: str
   """
+
   client = create_client(URL, KEY)
 
   """NB: query from 'random_hiking_routes' for server-side shuffling. 'hiking_routes' is the original table"""

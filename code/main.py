@@ -12,7 +12,7 @@ from app import StreamlitApp
 if "GEMINI_API_KEY" not in os.environ:
   os.environ["GEMINI_API_KEY"] = getpass.getpass("Enter Gemini API key: ")
 
-API_KEY = os.environ["GEMINI_API_KEY"]
+API_KEY = os.environ.get("GEMINI_API_KEY")
 
 weatherAgent = WeatherAgent(apiKey=API_KEY)
 calendarAgent = CalendarAgent(apiKey=API_KEY)
