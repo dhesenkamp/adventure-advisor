@@ -1,5 +1,6 @@
 import os
 import getpass
+import datetime
 
 from langchain_core.tools import tool
 from langchain_core.prompts import ChatPromptTemplate
@@ -22,7 +23,10 @@ class BaseAgent:
     self.prompt = self._buildPrompt(promptTemplate)
     self.agent = create_tool_calling_agent(self.model, self.tools, self.prompt)
     self.executor = AgentExecutor(
-        agent=self.agent, tools=self.tools, verbose=True)
+        agent=self.agent, 
+        tools=self.tools, 
+        verbose=True
+    )
 
   def _loadModel(self) -> ChatGoogleGenerativeAI:
     """Load a specific model using LangChain wrapper. Model parameters can be changed here."""
@@ -47,10 +51,11 @@ class BaseAgent:
         promptTemplate
     )
 
-  def run(self, query: str) -> dict:
+  def run(self, query: str, today=None) -> dict:
     """Run agent with a user query. The query is passed to the LLM and the result is returned as a dict. Get the NL result with key "output" and the tool call with the key "tool_call".
     """
-    return self.executor.invoke({"input": query})
+    today = datetime.datetime.now().date()
+    return self.executor.invoke({"input": query, "today": today})
 
 
 if __name__ == "__main__":
