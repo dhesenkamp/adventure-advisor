@@ -3,7 +3,7 @@ from google import genai
 from google.genai import types
 from orchestrator import OrchestratorAgent
 from weather import WeatherAgent
-from app import StreamlitApp
+from archive.app import StreamlitApp
 
 weather = WeatherAgent()
 activity = ActivityAgent()
