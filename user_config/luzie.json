@@ -1,0 +1,11 @@
+{
+  "name": "Luzie",
+  "age": null,
+  "distanceKm": 60,
+  "durationHours": 3,
+  "difficulty": 2,
+  "preferredActivities": [
+    "Cycling"
+  ],
+  "location": "Trento"
+}

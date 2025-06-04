@@ -1,0 +1,11 @@
+{
+  "name": "Dennis",
+  "age": null,
+  "distanceKm": 15,
+  "durationHours": 6,
+  "difficulty": 4,
+  "preferredActivities": [
+    "Hiking", "Climbing"
+  ],
+  "location": "Bolzano"
+}
