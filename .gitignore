@@ -178,5 +178,6 @@ cython_debug/
 *.DS_Store
 
 token.pickle
+token.json
 credentials.json
 .streamlit/secrets.toml
