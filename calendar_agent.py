@@ -64,11 +64,7 @@ def getEvents(date: str, timezone: str = "Europe/Berlin"):
     else:
       flow = InstalledAppFlow.from_client_config(
           CREDENTIALS, SCOPES)
-      authUrl = flow.authorization_url(prompt="consent")
-      print(f"Please go to this URL: {authUrl}")
-      code = input('Enter the authorization code: ')
-      flow.fetch_token(code=code)
-      creds = flow.credentials
+      creds = flow.run_local_server(port=0)
 
   with open("token.json", "w") as token:
     token.write(creds.to_json())
