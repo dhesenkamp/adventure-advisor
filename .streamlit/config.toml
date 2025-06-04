@@ -1,0 +1,14 @@
+[theme]
+base="dark"
+primaryColor="#9db2bf"
+backgroundColor="#26374d"
+secondaryBackgroundColor="#26374d"
+
+font=""
+headingFont=""
+
+baseRadius=""
+borderColor="#9db2bf"
+
+[theme.sidebar]
+secondaryBackgroundColor="#9db2bf"
