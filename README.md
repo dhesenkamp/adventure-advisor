@@ -53,6 +53,7 @@ Create conda environment file: `conda env export --from-history | grep -v "^pref
 - google-api-python-client
 - google-ai-generativelanguage
 - google-auth
+- google-auth-httplib2
 - google-auth-oauthlib
 - google-genai
 - langchain
