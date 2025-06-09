@@ -1,16 +1,15 @@
 # Adventure Advisor
 
-Launch app here:
-
-[v1](https://adventure-advisor.streamlit.app/?embed=true)
-
-[v2](https://adventure-advisor-cl.streamlit.app/?embed=true)
-
 > Personalized, AI-based outdoor activity recommender system for activities such as hiking, running, cycling, via ferrata, climbing, mountaineering.
+
+Launch app here: [Adventure Advisor](https://adventure-advisor.streamlit.app/?embed=true)
+
+[Presentation](https://docs.google.com/presentation/d/1I6_KMaVjDQBW956LGJKL19rHVB0e2eZjGBOP1vnWoXY/edit?usp=sharing)
+
+[Evaluation sheet](https://docs.google.com/spreadsheets/d/1s2wzH-LdQ_XxiupfGNUrsPM4WAnDElnGttlZy1dA5_8/edit?usp=sharing)
 
 [Project description & requirements](https://docs.google.com/document/d/1fnTi8bGLr4bmyiPhwUcyi8KCYAVgEAzMyFstvKaeqNs/edit?usp=sharing)
 
-# Architecture
 ![Architecture](assets/architecture.png)
 
 # Agents
@@ -28,7 +27,7 @@ order by random();
 ```
 
 # Deployment
-Run locally as `streamlit run code/main.py`.
+Run locally as `streamlit run main.py`.
 
 ## Environment vars
 Set up local environment with credentials, API keys, etc in `code/.env`:
